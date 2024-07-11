@@ -1,5 +1,5 @@
-#ifndef UTILITY_H
-#define UTILITY_H
+#ifndef RENDER_H
+#define RENDER_H
 
 void render(int top, int left);
 

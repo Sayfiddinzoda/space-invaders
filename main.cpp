@@ -2,7 +2,10 @@
 
 int main() {
 
-  render(5, 5, "hello world\nbye bye");
+  while (true) {
+    render(5, 5, "hello world\nbye bye");
+    clearScreen();
+  }
 
   return 0;
 }

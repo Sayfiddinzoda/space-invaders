@@ -22,7 +22,7 @@ void render(int top, int left, std::string content) {
   for (int i = 0; i < left - 1; i++)
     cout << "#";
 
-  cout << txt;
+  cout << content;
 
   for (int i = 0; i < height - top - 1; i++)
     cout << "#\n";

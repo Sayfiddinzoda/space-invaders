@@ -2,7 +2,7 @@
 
 int main() {
 
-  render(5, 5, "hello world");
+  render(5, 5, "hello world\nbye bye");
 
   return 0;
 }

@@ -43,23 +43,3 @@ void clearScreen(){
 }
 
 #endif
-
-void render(int top, int left, std::string content) {
-  int *windows_size = defineSize();
-  int width = windows_size[0];
-  int height = windows_size[1];
-  string txt;
-
-  for (int i = 0; i < top - 1; i++)
-    cout << "#\n";
-
-  for (int i = 0; i < left - 1; i++)
-    cout << "#";
-
-  cout << content;
-
-  for (int i = 0; i < height - top - 1; i++)
-    cout << "#\n";
-
-  delete[] windows_size;
-}

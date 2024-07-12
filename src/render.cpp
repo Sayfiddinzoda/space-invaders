@@ -1,9 +1,15 @@
 #include "../include/render.h"
 
+#if defined(_WIN32) || defined(_WIN64)
+#include <windows.h>
+
 int *defineSize() {
   int *arr = new int[2];
   arr[0] = 80; // width
   arr[1] = 30; // width
+
+  
+               
 
   return arr;
 }

@@ -1,42 +1,45 @@
-#include "render.h"
-#include <iostream>
+#include "../include/render.h"
+#include <cstdlib>
 
-void render(const Player& player, const std::vector<Enemy>& enemies, const std::vector<Bullet>& bullets) {
-    // Clear the screen
-    system("clear"); // For Unix-like systems, use "cls" for Windows
+#if defined(_WIN32) || defined(_WIN64)
+#include <window.h>
 
-    // Create a 2D array to represent the screen
-    char screen[SCREEN_HEIGHT][SCREEN_WIDTH];
+int *defineSize() {
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
-    // Initialize screen with blank spaces
-    for (int i = 0; i < SCREEN_HEIGHT; ++i) {
-        for (int j = 0; j < SCREEN_WIDTH; ++j) {
-            screen[i][j] = ' ';
-        }
-    }
+  int *arr = new int[2];
 
-    // Place the player on the screen
-    screen[player.y][player.x] = 'P';
+  arr[0] = csbi.srWindow.Right - csbi.srWindow.Left + 1; // width
+  arr[1] = csbi.srWindow.Bottom - csbi.srWindow.Top + 1; // height
 
-    // Place enemies on the screen
-    for (const auto& enemy : enemies) {
-        if (enemy.alive) {
-            screen[enemy.y][enemy.x] = 'E';
-        }
-    }
-
-    // Place bullets on the screen
-    for (const auto& bullet : bullets) {
-        if (bullet.active) {
-            screen[bullet.y][bullet.x] = '*';
-        }
-    }
-
-    // Print the screen
-    for (int i = 0; i < SCREEN_HEIGHT; ++i) {
-        for (int j = 0; j < SCREEN_WIDTH; ++j) {
-            std::cout << screen[i][j];
-        }
-        std::cout << std::endl;
-    }
+  return arr;
 }
+
+void clearScreen(){
+  std::system("cls");
+}
+
+#else
+#include <sys/ioctl.h>
+#include <unistd.h>
+
+int *defineSize() {
+  struct winsize w;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+  int *arr = new int[2];
+
+  arr[0] = w.ws_col; // width
+  arr[1] = w.ws_row; // height
+
+  return arr;
+}
+
+
+
+void clearScreen(){
+  std::system("clear");
+}
+
+#endif

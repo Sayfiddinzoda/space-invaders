@@ -1,8 +1,11 @@
 #ifndef RENDER_H
 #define RENDER_H
+#include <iostream>
+using namespace std;
 
 #include <vector>
 #include <string>
+
 
 // Constants for screen dimensions
 const int SCREEN_WIDTH = 80;
